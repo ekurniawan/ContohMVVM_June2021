@@ -3,7 +3,7 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,6 +14,7 @@ namespace ContohMVVM.ViewModels
     public class CoffeeViewModel : ViewModelBase
     {
         public ObservableRangeCollection<Coffee> Coffee { get; set; }
+        public ObservableRangeCollection<Grouping<string,Coffee>> CoffeeGroup { get; set; }
 
         public AsyncCommand RefreshCommand { get; }
 
@@ -21,11 +22,19 @@ namespace ContohMVVM.ViewModels
         {
             Title = "Coffee Equipment";
             Coffee = new ObservableRangeCollection<Coffee>();
+            CoffeeGroup = new ObservableRangeCollection<Grouping<string, Coffee>>();
+
             var image = "https://www.yesplz.coffee/app/uploads/2020/11/emptybag-min.png";
             Coffee.Add(new Coffee { Roaster="Dark Roast",Name="Italian Roast", Image=image });
             Coffee.Add(new Coffee { Roaster="Medium Roast",Name="Colombia",Image=image});
             Coffee.Add(new Coffee { Roaster = "Medium Roast", Name = "Pike Place", Image = image });
             Coffee.Add(new Coffee { Roaster = "Medium Roast", Name = "Brazilian", Image = image });
+
+            CoffeeGroup.Clear();
+            CoffeeGroup.Add(new Grouping<string, Coffee>("Dark Roast", 
+                Coffee.Where(c => c.Roaster == "Dark Roast")));
+            CoffeeGroup.Add(new Grouping<string, Coffee>("Medium Roast", 
+                Coffee.Where(c => c.Roaster == "Medium Roast")));
 
             RefreshCommand = new AsyncCommand(Refresh);
         }

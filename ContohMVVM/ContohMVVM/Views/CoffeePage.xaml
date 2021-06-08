@@ -8,7 +8,9 @@
     </ContentPage.BindingContext>
     
     <ListView BackgroundColor="Transparent"
-              ItemsSource="{Binding Coffee}"
+              ItemsSource="{Binding CoffeeGroup}"
+              GroupDisplayBinding="{Binding Key}"
+              IsGroupingEnabled="True"
               HasUnevenRows="True"
               SeparatorVisibility="None">
         <ListView.ItemTemplate>
