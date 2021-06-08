@@ -2,14 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:ContohMVVM.ViewModels"
-             x:Class="ContohMVVM.Views.CoffeePage">
+             x:Class="ContohMVVM.Views.CoffeePage" Title="{Binding Title}">
     <ContentPage.BindingContext>
         <viewmodels:CoffeeViewModel />
     </ContentPage.BindingContext>
-    <Grid RowDefinitions="*,Auto,Auto,*">
-        <Label Grid.Row="1" HorizontalOptions="Center"
-               FontSize="Large" Text="{Binding CountDisplay}" />
-        <Entry Text="{Binding CountDisplay}" />
-        <Button Grid.Row="2" Text="Click Me" Command="{Binding IncreaseCount}" />
-    </Grid>
+    
+    <ListView BackgroundColor="Transparent"
+              ItemsSource="{Binding Coffee}"
+              HasUnevenRows="True"
+              SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="10">
+                        <Frame CornerRadius="20" HasShadow="True">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Image}" WidthRequest="50" />
+                                <StackLayout VerticalOptions="Center">
+                                    <Label FontSize="Large" 
+                                           Text="{Binding Name}" VerticalOptions="Center" />
+                                    <Label FontSize="Large"
+                                           Text="{Binding Roaster}" VerticalOptions="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
