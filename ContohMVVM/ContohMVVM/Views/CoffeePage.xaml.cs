@@ -16,7 +16,7 @@ namespace ContohMVVM.Views
         public CoffeePage()
         {
             InitializeComponent();
-            BindingContext = new CoffeeViewModel();
+            //BindingContext = new CoffeeViewModel();
         }
        
     }
