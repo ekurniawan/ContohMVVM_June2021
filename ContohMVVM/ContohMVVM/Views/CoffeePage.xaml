@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ContohMVVM.Views.CoffeePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid RowDefinitions="*,Auto,Auto,*">
+        <Label Grid.Row="1" HorizontalOptions="Center"
+               FontSize="Large" Text="{Binding CountDisplay}" />
+        <Entry Text="{Binding CountDisplay}" />
+
+        <Button Grid.Row="2" Text="Click Me" Command="{Binding IncreaseCount}" />
+    </Grid>
 </ContentPage>
