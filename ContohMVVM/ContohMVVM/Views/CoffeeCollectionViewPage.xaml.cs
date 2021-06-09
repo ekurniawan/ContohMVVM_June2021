@@ -18,7 +18,8 @@ namespace ContohMVVM.Views
             InitializeComponent();
         }
 
-        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CollectionView_SelectionChanged(object sender, 
+            SelectionChangedEventArgs e)
         {
             var data = e.CurrentSelection[0] as Coffee;
             await DisplayAlert("Favorite Coffee", data.Name, "OK");
