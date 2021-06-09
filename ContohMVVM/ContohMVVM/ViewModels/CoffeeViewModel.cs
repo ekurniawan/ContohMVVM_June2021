@@ -39,6 +39,21 @@ namespace ContohMVVM.ViewModels
             RefreshCommand = new AsyncCommand(Refresh);
         }
 
+        private Coffee selectedCoffee;
+        public Coffee SelectedCoffee
+        {
+            get { return selectedCoffee; }
+            set {
+                if (value != null) {
+                    Application.Current.MainPage.DisplayAlert("Selected", value.Name, "OK");
+                    value = null;
+                }
+                selectedCoffee = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private async Task Refresh()
         {
             IsBusy = true;

@@ -20,7 +20,7 @@ namespace ContohMVVM.Views
             //BindingContext = new CoffeeViewModel();
         }
 
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        /*private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             ((ListView)sender).SelectedItem = null;
         }
@@ -39,6 +39,6 @@ namespace ContohMVVM.Views
             if (coffee == null)
                 return;
             await DisplayAlert("Coffee Favorite", coffee.Name, "OK");
-        }
+        }*/
     }
 }

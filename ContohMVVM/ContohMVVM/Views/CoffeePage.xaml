@@ -17,13 +17,12 @@
               RefreshCommand="{Binding RefreshCommand}"
               RefreshControlColor="Red"
               SeparatorVisibility="None"
-              ItemTapped="ListView_ItemTapped"
-              ItemSelected="ListView_ItemSelected">
+              SelectedItem="{Binding SelectedCoffee,Mode=TwoWay}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.ContextActions>
-                        <MenuItem Text="Favorite" Clicked="MenuItem_Clicked" />
+                        <MenuItem Text="Favorite" />
                         <MenuItem Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
                     <Grid Padding="10">
