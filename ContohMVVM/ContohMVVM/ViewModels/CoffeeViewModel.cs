@@ -17,7 +17,7 @@ namespace ContohMVVM.ViewModels
         public ObservableRangeCollection<Grouping<string,Coffee>> CoffeeGroup { get; set; }
 
         public AsyncCommand RefreshCommand { get; }
-
+        public AsyncCommand<Coffee> FavoriteCommand { get; set; }
         public CoffeeViewModel()
         {
             Title = "Coffee Equipment";
@@ -37,6 +37,14 @@ namespace ContohMVVM.ViewModels
                 Coffee.Where(c => c.Roaster == "Medium Roast")));
 
             RefreshCommand = new AsyncCommand(Refresh);
+            FavoriteCommand = new AsyncCommand<Coffee>(Favorite);
+        }
+
+        private async Task Favorite(Coffee coffee)
+        {
+            if (coffee == null)
+                return;
+            await Application.Current.MainPage.DisplayAlert("Favorite", coffee.Name, "OK");
         }
 
         private Coffee selectedCoffee;

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:ContohMVVM.ViewModels"
-             x:Class="ContohMVVM.Views.CoffeePage" Title="{Binding Title}">
+             x:Class="ContohMVVM.Views.CoffeePage" Title="{Binding Title}"
+             x:Name="CoffeePageReference">
     <ContentPage.BindingContext>
         <viewmodels:CoffeeViewModel />
     </ContentPage.BindingContext>
@@ -22,7 +23,10 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.ContextActions>
-                        <MenuItem Text="Favorite" />
+                        <MenuItem Text="Favorite" 
+                                  Command="{Binding Source={x:Reference CoffeePageReference},
+                                    Path=BindingContext.FavoriteCommand}"
+                                  CommandParameter="{Binding .}"/>
                         <MenuItem Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
                     <Grid Padding="10">
@@ -35,6 +39,9 @@
                                     <Label FontSize="Large"
                                            Text="{Binding Roaster}" VerticalOptions="Center" />
                                 </StackLayout>
+                                <Button Text="Favorite" FontSize="Small" 
+                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CoffeeViewModel}},
+                                    Path=FavoriteCommand}" CommandParameter="{Binding .}" />
                             </StackLayout>
                         </Frame>
                     </Grid>
