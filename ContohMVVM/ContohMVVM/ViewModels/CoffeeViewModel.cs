@@ -17,7 +17,8 @@ namespace ContohMVVM.ViewModels
         public ObservableRangeCollection<Grouping<string,Coffee>> CoffeeGroup { get; set; }
 
         public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand<Coffee> FavoriteCommand { get; set; }
+        public AsyncCommand<Coffee> FavoriteCommand { get;  }
+        public AsyncCommand<object> SelectedCommand { get; }
         public CoffeeViewModel()
         {
             Title = "Coffee Equipment";
@@ -38,6 +39,16 @@ namespace ContohMVVM.ViewModels
 
             RefreshCommand = new AsyncCommand(Refresh);
             FavoriteCommand = new AsyncCommand<Coffee>(Favorite);
+            SelectedCommand = new AsyncCommand<object>(Selected);
+        }
+
+        private async Task Selected(object arg)
+        {
+            var coffee = arg as Coffee;
+            if (coffee == null)
+                return;
+            SelectedCoffee = null;
+            await Application.Current.MainPage.DisplayAlert("Favorite", coffee.Name, "OK");
         }
 
         private async Task Favorite(Coffee coffee)
@@ -50,15 +61,8 @@ namespace ContohMVVM.ViewModels
         private Coffee selectedCoffee;
         public Coffee SelectedCoffee
         {
-            get { return selectedCoffee; }
-            set {
-                if (value != null) {
-                    Application.Current.MainPage.DisplayAlert("Selected", value.Name, "OK");
-                    value = null;
-                }
-                selectedCoffee = value;
-                OnPropertyChanged();
-            }
+            get => selectedCoffee;
+            set => SetProperty(ref selectedCoffee, value);
         }
 
 

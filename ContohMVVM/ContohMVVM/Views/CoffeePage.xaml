@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:ContohMVVM.ViewModels"
              x:Class="ContohMVVM.Views.CoffeePage" Title="{Binding Title}"
-             x:Name="CoffeePageReference">
+             x:Name="CoffeePageReference"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
     <ContentPage.BindingContext>
         <viewmodels:CoffeeViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ListView BackgroundColor="Transparent"
               ItemsSource="{Binding CoffeeGroup}"
@@ -19,6 +25,11 @@
               RefreshControlColor="Red"
               SeparatorVisibility="None"
               SelectedItem="{Binding SelectedCoffee,Mode=TwoWay}">
+        <ListView.Behaviors>
+            <xct:EventToCommandBehavior EventName="ItemSelected"
+                                        Command="{Binding SelectedCommand}"
+                                        EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}" />
+        </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
