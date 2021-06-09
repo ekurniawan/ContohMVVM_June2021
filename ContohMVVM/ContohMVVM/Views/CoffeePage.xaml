@@ -28,7 +28,7 @@
         <ListView.Behaviors>
             <xct:EventToCommandBehavior EventName="ItemSelected"
                                         Command="{Binding SelectedCommand}"
-                                        EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}" />
+                                        EventArgsConverter="{StaticResource IteItemSelectedEventArgsConverterm}" />
         </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>
