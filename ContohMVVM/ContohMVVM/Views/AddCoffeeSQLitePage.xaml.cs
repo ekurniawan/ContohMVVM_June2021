@@ -10,13 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace ContohMVVM.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CoffeeSQLitePage : ContentPage
+    public partial class AddCoffeeSQLitePage : ContentPage
     {
-        public CoffeeSQLitePage()
+        public AddCoffeeSQLitePage()
         {
             InitializeComponent();
         }
-
-        
     }
 }

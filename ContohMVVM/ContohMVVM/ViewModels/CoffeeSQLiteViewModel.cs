@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ContohMVVM.ViewModels
 {
@@ -15,6 +16,7 @@ namespace ContohMVVM.ViewModels
         public AsyncCommand RefreshCommand { get;  }
         public AsyncCommand AddCommand { get;  }
         public AsyncCommand<Coffee> RemoveCommand { get; }
+        public AsyncCommand<object> SelectedCommand { get; }
 
         public CoffeeSQLiteViewModel()
         {
@@ -24,6 +26,23 @@ namespace ContohMVVM.ViewModels
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
             RemoveCommand = new AsyncCommand<Coffee>(Remove);
+            SelectedCommand = new AsyncCommand<object>(Selected);
+        }
+
+        private Coffee selectedCoffee;
+        public Coffee SelectedCoffee
+        {
+            get => selectedCoffee;
+            set => SetProperty(ref selectedCoffee, value);
+        }
+
+        private async Task Selected(object arg)
+        {
+            var coffee = arg as Coffee;
+            if (coffee == null)
+                return;
+            SelectedCoffee = null;
+            await Application.Current.MainPage.DisplayAlert("Favorite", coffee.Name, "OK");
         }
 
         private async Task Remove(Coffee coffee)

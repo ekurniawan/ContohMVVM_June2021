@@ -26,9 +26,10 @@
               SeparatorVisibility="None"
               SelectedItem="{Binding SelectedCoffee,Mode=TwoWay}">
         <ListView.Behaviors>
-            <xct:EventToCommandBehavior EventName="ItemSelected"
-                                        Command="{Binding SelectedCommand}"
-                                        EventArgsConverter="{StaticResource IteItemSelectedEventArgsConverterm}" />
+            <xct:EventToCommandBehavior
+                EventName="ItemSelected"
+                Command="{Binding SelectedCommand}"                
+                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
         </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>

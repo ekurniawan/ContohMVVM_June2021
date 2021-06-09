@@ -82,6 +82,9 @@
     <FlyoutItem Title="Coffee SQLite" Icon="icon_about.png">
         <ShellContent Route="CoffeeSQLitePage" ContentTemplate="{DataTemplate local:CoffeeSQLitePage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Add Coffee" Icon="icon_about.png">
+        <ShellContent Route="AddCoffeeSQLitePage" ContentTemplate="{DataTemplate local:AddCoffeeSQLitePage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Coffee Collection View" Icon="icon_about.png">
         <ShellContent Route="CoffeeCollectionViewPage" 
                       ContentTemplate="{DataTemplate local:CoffeeCollectionViewPage}" />
