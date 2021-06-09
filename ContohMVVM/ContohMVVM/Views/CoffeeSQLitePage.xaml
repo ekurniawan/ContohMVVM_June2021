@@ -2,10 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:ContohMVVM.ViewModels"
-             x:Class="ContohMVVM.Views.CoffeeSQLitePage">
+             x:Class="ContohMVVM.Views.CoffeeSQLitePage"
+             x:Name="CoffeSQLitePageReference">
     <ContentPage.BindingContext>
         <viewmodels:CoffeeSQLiteViewModel />
     </ContentPage.BindingContext>
+    
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCommand}" />
@@ -24,6 +26,10 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete" Command="{Binding Source={x:Reference CoffeSQLitePageReference},Path=BindingContext.RemoveCommand}" 
+                                  CommandParameter="{Binding .}" IsDestructive="True" />
+                    </ViewCell.ContextActions>
                     <Grid Padding="10">
                         <Frame CornerRadius="20" HasShadow="True">
                             <StackLayout Orientation="Horizontal">

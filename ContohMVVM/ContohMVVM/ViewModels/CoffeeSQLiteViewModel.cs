@@ -12,8 +12,9 @@ namespace ContohMVVM.ViewModels
     public class CoffeeSQLiteViewModel : ViewModelBase
     {
         public ObservableRangeCollection<Coffee> Coffee { get; set; }
-        public AsyncCommand RefreshCommand { get; set; }
-        public AsyncCommand AddCommand { get; set; }
+        public AsyncCommand RefreshCommand { get;  }
+        public AsyncCommand AddCommand { get;  }
+        public AsyncCommand<Coffee> RemoveCommand { get; }
 
         public CoffeeSQLiteViewModel()
         {
@@ -22,6 +23,14 @@ namespace ContohMVVM.ViewModels
 
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
+            RemoveCommand = new AsyncCommand<Coffee>(Remove);
+        }
+
+        private async Task Remove(Coffee coffee)
+        {
+            await CoffeeService.RemoveCoffee(coffee.Id);
+            await Refresh();
+            //await App.Current.MainPage.DisplayAlert("Keterangan", coffee.Name, "OK");
         }
 
         private async Task Add()
@@ -35,7 +44,7 @@ namespace ContohMVVM.ViewModels
         private async Task Refresh()
         {
             IsBusy = true;
-            await Task.Delay(2000);
+            await Task.Delay(1000);
 
             Coffee.Clear();
             var results = await CoffeeService.GetCoffee();
