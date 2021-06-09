@@ -16,10 +16,16 @@
               IsRefreshing="{Binding IsBusy,Mode=OneWay}"
               RefreshCommand="{Binding RefreshCommand}"
               RefreshControlColor="Red"
-              SeparatorVisibility="None">
+              SeparatorVisibility="None"
+              ItemTapped="ListView_ItemTapped"
+              ItemSelected="ListView_ItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Favorite" Clicked="MenuItem_Clicked" />
+                        <MenuItem Text="Delete" IsDestructive="True" />
+                    </ViewCell.ContextActions>
                     <Grid Padding="10">
                         <Frame CornerRadius="20" HasShadow="True">
                             <StackLayout Orientation="Horizontal">
