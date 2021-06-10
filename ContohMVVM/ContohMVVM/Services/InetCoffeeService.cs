@@ -45,9 +45,23 @@ namespace ContohMVVM.Services
             }
         }
 
-        public Task EditCoffee(int Id, Coffee coffee)
+        public async Task EditCoffee(int Id, Coffee coffee)
         {
-            throw new NotImplementedException();
+            var uri = new Uri($"{baseUrl}/api/Coffee/{Id}");
+            try
+            {
+                var json = JsonConvert.SerializeObject(coffee);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _client.PutAsync(uri, content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Gagal update data");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
         }
 
         public async Task<IEnumerable<Coffee>> GetCoffee()
@@ -70,14 +84,41 @@ namespace ContohMVVM.Services
             }
         }
 
-        public Task<Coffee> GetCoffee(int id)
+        public async Task<Coffee> GetCoffee(int id)
         {
-            throw new NotImplementedException();
+            Coffee coffee = new Coffee();
+            var uri = new Uri($"{baseUrl}/api/Coffee/{id}");
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    coffee = JsonConvert.DeserializeObject<Coffee>(content);
+                }
+                return coffee;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
         }
 
-        public Task RemoveCoffee(int id)
+        public async Task RemoveCoffee(int id)
         {
-            throw new NotImplementedException();
+            var uri = new Uri($"{baseUrl}/api/Coffee/{id}");
+            try
+            {
+                var response = await _client.DeleteAsync(uri);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Gagal untuk delete data");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error: {ex.Message}");
+            }
         }
     }
 }
