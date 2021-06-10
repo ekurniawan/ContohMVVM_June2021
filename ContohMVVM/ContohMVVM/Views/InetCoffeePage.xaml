@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:ContohMVVM.ViewModels" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="ContohMVVM.Views.InetCoffeePage" 
+             x:Name="InetCoffePageReference" Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <viewmodels:InetCoffeeViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior EventName="Appearing" 
+                                    Command="{Binding RefreshCommand}" />
+    </ContentPage.Behaviors>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}" />
+    </ContentPage.ToolbarItems>
+
+
+    <ListView BackgroundColor="Transparent"
+              ItemsSource="{Binding Coffee}"
+              HasUnevenRows="True"
+              IsPullToRefreshEnabled="True"
+              IsRefreshing="{Binding IsBusy,Mode=OneWay}"
+              RefreshCommand="{Binding RefreshCommand}"
+              RefreshControlColor="Red"
+              SeparatorVisibility="None">
+        <ListView.Behaviors>
+            <xct:EventToCommandBehavior
+                EventName="ItemSelected"
+                Command="{Binding SelectedCommand}"                
+                EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete" Command="{Binding Source={x:Reference InetCoffePageReference},Path=BindingContext.RemoveCommand}" 
+                                  CommandParameter="{Binding .}" IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                        <Frame CornerRadius="20" HasShadow="True">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Image}" WidthRequest="50" />
+                                <StackLayout VerticalOptions="Center">
+                                    <Label FontSize="Large" 
+                                           Text="{Binding Name}" VerticalOptions="Center" />
+                                    <Label FontSize="Large"
+                                           Text="{Binding Roaster}" VerticalOptions="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
