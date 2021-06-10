@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 
 namespace ContohMVVM
 {
+    //
     public partial class App : Application
     {
 
