@@ -1,4 +1,4 @@
-﻿using ContohMVVM.Models;
+﻿using ContohMVVM.Shared.Models;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;

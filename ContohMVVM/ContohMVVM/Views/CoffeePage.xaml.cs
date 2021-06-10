@@ -1,4 +1,4 @@
-﻿using ContohMVVM.Models;
+﻿using ContohMVVM.Shared.Models;
 using ContohMVVM.ViewModels;
 using System;
 using System.Collections.Generic;

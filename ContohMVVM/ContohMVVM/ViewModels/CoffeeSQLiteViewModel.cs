@@ -1,4 +1,4 @@
-﻿using ContohMVVM.Models;
+﻿using ContohMVVM.Shared.Models;
 using ContohMVVM.Services;
 using ContohMVVM.Views;
 using MvvmHelpers;
@@ -30,20 +30,13 @@ namespace ContohMVVM.ViewModels
             SelectedCommand = new AsyncCommand<object>(Selected);
         }
 
-        private Coffee selectedCoffee;
-        public Coffee SelectedCoffee
-        {
-            get => selectedCoffee;
-            set => SetProperty(ref selectedCoffee, value);
-        }
-
         private async Task Selected(object arg)
         {
             var coffee = arg as Coffee;
             if (coffee == null)
                 return;
-            SelectedCoffee = null;
-            await Application.Current.MainPage.DisplayAlert("Favorite", coffee.Name, "OK");
+            var route = $"{nameof(DetailCoffeeSQLitePage)}?CoffeeId={coffee.Id}";
+            await Shell.Current.GoToAsync(route);
         }
 
         private async Task Remove(Coffee coffee)

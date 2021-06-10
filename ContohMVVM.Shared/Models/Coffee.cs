@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ContohMVVM.Models
+namespace ContohMVVM.Shared.Models
 {
     public class Coffee
     {
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Roaster { get; set; }
         public string Name { get; set; }

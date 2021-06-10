@@ -13,6 +13,8 @@ namespace ContohMVVM
 
             Routing.RegisterRoute(nameof(AddCoffeeSQLitePage),
                 typeof(AddCoffeeSQLitePage));
+            Routing.RegisterRoute(nameof(DetailCoffeeSQLitePage),
+                typeof(DetailCoffeeSQLitePage));
         }
     }
 }
