@@ -5,6 +5,7 @@ using System.Text;
 using MvvmHelpers;
 using System.Threading.Tasks;
 using ContohMVVM.Services;
+using Xamarin.Forms;
 
 namespace ContohMVVM.ViewModels
 {
@@ -25,6 +26,7 @@ namespace ContohMVVM.ViewModels
                 return;
             }
             await CoffeeService.AddCoffee(name, roaster);
+            await Shell.Current.GoToAsync("..");
         }
 
         private string name;

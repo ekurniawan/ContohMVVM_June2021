@@ -10,6 +10,9 @@ namespace ContohMVVM
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(AddCoffeeSQLitePage),
+                typeof(AddCoffeeSQLitePage));
         }
     }
 }

@@ -79,21 +79,33 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <StackLayout Padding="10">
+                <Label Text="Coffee Apps" FontSize="Medium" />
+                <Image Source="logo.png" HorizontalOptions="Start" WidthRequest="60" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+
+    <!-- <Tab>
+        <ShellContent Title="Add" ContentTemplate="{DataTemplate local:AddCoffeeSQLitePage}" />
+        <ShellContent Title="Coffee" ContentTemplate="{DataTemplate local:CoffeeCollectionViewPage}" />
+    </Tab> -->
+
     <FlyoutItem Title="Coffee SQLite" Icon="icon_about.png">
-        <ShellContent Route="CoffeeSQLitePage" ContentTemplate="{DataTemplate local:CoffeeSQLitePage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Add Coffee" Icon="icon_about.png">
-        <ShellContent Route="AddCoffeeSQLitePage" ContentTemplate="{DataTemplate local:AddCoffeeSQLitePage}" />
+        <ShellContent  Route="CoffeeSQLitePage" ContentTemplate="{DataTemplate local:CoffeeSQLitePage}" />
     </FlyoutItem>
     <FlyoutItem Title="Coffee Collection View" Icon="icon_about.png">
-        <ShellContent Route="CoffeeCollectionViewPage" 
+        <ShellContent Route="CoffeeCollectionViewPage"  
                       ContentTemplate="{DataTemplate local:CoffeeCollectionViewPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Coffee Equipment" Icon="icon_about.png">
-        <ShellContent Route="CoffeePage" ContentTemplate="{DataTemplate local:CoffeePage}" />
+    <FlyoutItem Title="Coffee Page" Icon="icon_about.png">
+        <ShellContent  Route="CoffeePage" ContentTemplate="{DataTemplate local:CoffeePage}" />
     </FlyoutItem>
-    
-    
+
+
 
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.

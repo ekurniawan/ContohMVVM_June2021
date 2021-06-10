@@ -1,5 +1,6 @@
 ﻿using ContohMVVM.Models;
 using ContohMVVM.Services;
+using ContohMVVM.Views;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
@@ -54,20 +55,22 @@ namespace ContohMVVM.ViewModels
 
         private async Task Add()
         {
-            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Coffee Name");
-            var roaster = await App.Current.MainPage.DisplayPromptAsync("Roaster", "Coffee Roaster");
-            await CoffeeService.AddCoffee(name, roaster);
-            await Refresh();
+            //var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Coffee Name");
+            //var roaster = await App.Current.MainPage.DisplayPromptAsync("Roaster", "Coffee Roaster");
+            //await CoffeeService.AddCoffee(name, roaster);
+            var route = $"{nameof(AddCoffeeSQLitePage)}";
+            await Shell.Current.GoToAsync(route);
         }
 
         private async Task Refresh()
         {
             IsBusy = true;
-            await Task.Delay(1000);
+            //await Task.Delay(1000);
 
             Coffee.Clear();
             var results = await CoffeeService.GetCoffee();
             Coffee.AddRange(results);
+
 
             IsBusy = false;
         }
