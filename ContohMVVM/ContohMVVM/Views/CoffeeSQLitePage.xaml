@@ -2,9 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:ContohMVVM.ViewModels" 
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="ContohMVVM.Views.CoffeeSQLitePage"
-             x:Name="CoffeSQLitePageReference">
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" x:Name="CoffeSQLitePageReference"
+             x:Class="ContohMVVM.Views.CoffeeSQLitePage" Title="{Binding Title}">
     <ContentPage.BindingContext>
         <viewmodels:CoffeeSQLiteViewModel />
     </ContentPage.BindingContext>
@@ -13,26 +12,26 @@
             <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior EventName="Appearing" 
+                                    Command="{Binding RefreshCommand}" />
+    </ContentPage.Behaviors>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCommand}" />
     </ContentPage.ToolbarItems>
 
 
-
     <ListView BackgroundColor="Transparent"
-              CachingStrategy="RecycleElement"
               ItemsSource="{Binding Coffee}"
               HasUnevenRows="True"
               IsPullToRefreshEnabled="True"
               IsRefreshing="{Binding IsBusy,Mode=OneWay}"
               RefreshCommand="{Binding RefreshCommand}"
               RefreshControlColor="Red"
-              SeparatorVisibility="None"
-              SelectionMode="None"
-              SelectedItem="{Binding SelectedCoffee,Mode=TwoWay}">
+              SeparatorVisibility="None">
         <ListView.Behaviors>
-            <xct:EventToCommandBehavior EventName="ItemSelected"
+            <xct:EventToCommandBehavior
+                EventName="ItemSelected"
                 Command="{Binding SelectedCommand}"                
                 EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
         </ListView.Behaviors>
